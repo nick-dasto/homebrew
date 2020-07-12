@@ -11,12 +11,17 @@ html {
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
 }
+:root{
+  --yellow-color: rgb(245, 229, 52);
+  --green-color: rgb(71, 195, 40);
+  --red-color: rgb(255, 59, 59);
+}
 
 body {
   height: 100vh;
   position: relative;
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.1)),
-    url(images/beer.jpg) center no-repeat;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(images/beer.jpg) 50% 100% no-repeat;
   background-size: cover;
   display: flex;
   justify-content: center;
@@ -44,9 +49,9 @@ body {
 }
 .page-container > div > div {
   border: 1px solid #000;
-  border-radius: 2.5rem 0;
+  border-radius: 2.5rem;
   position: relative;
-  padding: 3rem 2rem 1rem 2rem;
+  padding: 3.5rem 2rem 1rem 2rem;
   background-color: #f1f0f0;
   transition: 300ms ease-out;
 }
@@ -61,9 +66,9 @@ body {
   padding: 0.25rem 1rem 0.5rem 1rem;
   background-color: #fff;
   border-radius: 2rem 0;
-  font-size: 2rem;
+  font-size: 2.4rem;
   letter-spacing: 0.1rem;
-  border: 1px solid rgb(238, 170, 69);
+  border: 2px solid rgb(238, 170, 69);
 }
 .page-container > div > div > p,
 .page-container > div > div > ol > li {
@@ -114,6 +119,7 @@ body {
   white-space: nowrap;
   text-align: right;
   font-size: 1.6rem;
+  font-weight: bold;
 }
 .label-and-input > p {
   font-size: 1.6rem;
@@ -183,11 +189,11 @@ body {
   height: 25rem;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  margin: 1rem;
-  padding: 2rem;
-  background-color: #2e4ea5;
+  margin: .5rem;
+  padding: 5rem 2rem 2rem 2rem;
+  background-color: rgba(0,0,0,.7);
   border-radius: 2rem;
   color: #e3e3e3;
   transition: transform 400ms ease-out;
@@ -223,25 +229,25 @@ button:hover {
   filter: brightness(1.1);
 }
 .close {
-  background-color: palegoldenrod;
+  background-color: var(--yellow-color);
   bottom: 3%;
   left: 85%;
   transform: translate(-50%, -50%);
 }
 .edit {
-  background-color: palegreen;
+  background-color: var(--green-color);
   bottom: 17%;
   left: 85%;
   transform: translate(-50%, -50%);
 }
 .delete {
-  background-color: palevioletred;
+  background-color: var(--red-color);
   bottom: 10%;
   left: 85%;
   transform: translate(-50%, -50%);
 }
 .view {
-  background-color: palegoldenrod;
+  background-color: var(--yellow-color);
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);

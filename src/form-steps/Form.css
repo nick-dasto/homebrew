@@ -18,7 +18,7 @@ html {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #3e3e3e;
+  background-color: rgba(0, 0, 0, 0.7);
   padding: 2rem;
   border-radius: 4rem;
   display: flex;
@@ -51,10 +51,10 @@ form {
   display: flex;
   justify-content: space-between;
   width: 100%;
-  padding: 0.1rem 0;
+  padding: 0.15rem 0;
 }
 .label-group > label {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: #e3e3e3;
   white-space: nowrap;
@@ -64,6 +64,13 @@ form {
 .label-group > input {
   flex-grow: 1;
   overflow: hidden;
+  background: transparent;
+  border:none;
+  border-bottom: 1.5px solid #e3e3e3;
+  color: #e3e3e3;
+}
+.label-group > input:focus{
+  border-bottom: 1.5px solid var(--green-color);
 }
 button {
   position: absolute;
@@ -72,18 +79,18 @@ button {
   border: none;
   padding: 0.5rem 2rem;
   border-radius: 2.5rem;
-  color: #3e3e3e;
+  color: #000;
   cursor: pointer;
 }
 .prev {
-  background-color: palevioletred;
+  background-color: var(--red-color);
   left: 30%;
 }
 .next {
-  background-color: palegreen;
+  background-color: var(--green-color);
   right: 30%;
 }
 .save {
-  background-color: palegoldenrod;
+  background-color: var(--yellow-color);
   right: 30%;
 }

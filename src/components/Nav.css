@@ -18,15 +18,16 @@ header {
   min-height: 2rem;
   padding: 0 3rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   position: fixed;
   top: 10%;
   left: 50%;
   transform: translate(-50%, -50%);
   color: #e3e3e3;
-  border-top: 1px solid #e3e3e3;
-  border-bottom: 1px solid #e3e3e3;
+  border-top: 3px solid #e3e3e3;
+  border-bottom: 3px solid #e3e3e3;
+  background-color: rgba(0,0,0,.7);
 }
 h1 {
   font-size: 6rem;

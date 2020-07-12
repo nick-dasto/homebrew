@@ -67,11 +67,11 @@ function Entry({ b }) {
               <p>{b.generalInfo.brewingDate}</p>
             </div>
             <div className="label-and-input">
-              <label>Date on Secondary:</label>
+              <label>Second date:</label>
               <p>{b.generalInfo.dateSecondary}</p>
             </div>
             <div className="label-and-input">
-              <label>Date on Bottling:</label>
+              <label>Bottling Date:</label>
               <p>{b.generalInfo.dateBottling}</p>
             </div>
             <div className="label-and-input">
@@ -127,6 +127,10 @@ function Entry({ b }) {
           <div className="label-and-input">
             <label>Bitterness:</label>
             <p>{b.tastingNotes.bitterness}</p>
+          </div>
+          <div className="label-and-input">
+            <label>Conumer Rating:</label>
+            <p>{b.tastingNotes.consumerRating}</p>
           </div>
         </div>
         <div className="additional-notes">
