@@ -1,25 +1,43 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import info from "./config";
+import Nav from "./Nav.js";
+import Entry from "./Entry.js";
+import Form from "./Form.js";
+import "./App.css";
 
 function App() {
+  const [brew, setBrew] = useState(info);
+  const [create, setCreate] = useState(false);
+
+  // Design the cards - animate everything with CCSTransition
+
+  // Code Edit button => IMPORTANT - globalContext is a must with edit
+
+  // Incorperate a blue accent theme?
+
+  useEffect(() => {
+    setBrew(info);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Nav create={create} setCreate={setCreate} />
+
+      {create ? (
+        <Form
+          brew={brew}
+          setBrew={setBrew}
+          create={create}
+          setCreate={setCreate}
+        />
+      ) : (
+        <div className="entry-container">
+          {brew.map((b) => (
+            <Entry key={b.generalInfo.name} b={b} />
+          ))}
+        </div>
+      )}
+    </>
   );
 }
 
