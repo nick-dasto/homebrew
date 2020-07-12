@@ -12,7 +12,7 @@ html {
     sans-serif;
 }
 .form-container {
-  height: 50rem;
+  min-height: 50rem;
   width: 50rem;
   position: absolute;
   top: 50%;
@@ -40,6 +40,7 @@ html {
 form {
   width: 80%;
   height: 100%;
+  margin: 8rem 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -64,9 +65,9 @@ form {
   flex-grow: 1;
   overflow: hidden;
 }
-form > button {
+button {
   position: absolute;
-  bottom: 0;
+  bottom: 5%;
   font-size: 2.5rem;
   border: none;
   padding: 0.5rem 2rem;
@@ -76,13 +77,13 @@ form > button {
 }
 .prev {
   background-color: palevioletred;
-  left: 0;
+  left: 30%;
 }
 .next {
   background-color: palegreen;
-  right: 0;
+  right: 30%;
 }
 .save {
   background-color: palegoldenrod;
-  right: 0;
+  right: 30%;
 }

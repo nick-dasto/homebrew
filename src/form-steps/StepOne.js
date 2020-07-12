@@ -113,10 +113,11 @@ function StepOne({ step, next, handleChangeGeneral }) {
             onChange={handleChangeGeneral}
           />
         </div>
-        <button className="next" onClick={next}>
+
+      </form>
+      <button className="next" onClick={next}>
           Next
         </button>
-      </form>
     </div>
   );
 }

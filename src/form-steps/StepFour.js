@@ -74,13 +74,14 @@ function StepFour({
             onChange={handleChange}
           />
         </div>
-        <button className="prev" onClick={prev}>
+
+      </form>
+      <button className="prev" onClick={prev}>
           Prev
         </button>
         <button className="save" onClick={handleSubmit}>
           Save
         </button>
-      </form>
     </div>
   );
 }

@@ -1,40 +1,17 @@
-import React, { useState } from "react";
-import StepOne from "./form-steps/StepOne";
-import StepThree from "./form-steps/StepThree";
-import StepFour from "./form-steps/StepFour";
-import "./form-steps/Form.css";
+import React, { useContext} from "react";
+import StepOne from "../form-steps/StepOne";
+import StepThree from "../form-steps/StepThree";
+import StepFour from "../form-steps/StepFour";
+import "../form-steps/Form.css";
+import { BrewContext } from "../context/BrewContext";
+import { formData } from '../config'
 
-function Form({ brew, setBrew, create, setCreate }) {
-  const [step, setStep] = useState({
-    stage: 1,
-    generalInfo: {
-      name: "",
-      batchSize: "",
-      batchType: "",
-      batchNumber: "",
-      ibu: "",
-      srm: "",
-      abv: "",
-      origionalGravity: "",
-      finalGravity: "",
-      brewingDate: "",
-      dateSecondary: "",
-      dateBottling: "",
-    },
-    ingredients: "",
-    brewingNotes: "",
-    hopsNotes: "",
-    yeastNotes: "",
-    fermentationNotes: "",
-    keggingNotes: "",
-    tastingNotes: {
-      appreance: "",
-      aroma: "",
-      flavor: "",
-      bitterness: "",
-    },
-    additionalNotes: "",
-  });
+function Form() {
+  const {brew, setBrew} = useContext(BrewContext)
+  const {create, setCreate} = useContext(BrewContext)
+  const {step, setStep} = useContext(BrewContext)
+  const {edit, setEdit} = useContext(BrewContext)
+  const {index} = useContext(BrewContext)
 
   const next = () => {
     const { stage } = step;
@@ -69,10 +46,23 @@ function Form({ brew, setBrew, create, setCreate }) {
     e.persist();
     setStep((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
+  const submitEdit = (index, b) => {
+    const newBrew = [...brew];
+    newBrew[index] = b;
+    setBrew(newBrew);
+    }
   const handleSubmit = (e) => {
     e.preventDefault();
-    setBrew([...brew, step]);
+    if(edit){
+      submitEdit(index, step);
+      setEdit(false);
+      setCreate(!create);
+      setStep(formData)
+    }else{
+    setBrew([...brew, {...step, stage:1 }]);
     setCreate(!create);
+    setStep(formData)
+    }
   };
   switch (step.stage) {
     case 1:
@@ -104,6 +94,10 @@ function Form({ brew, setBrew, create, setCreate }) {
           handleSubmit={handleSubmit}
         />
       );
+      default:
+        return(
+          <h1>Error with form</h1>
+        );
   }
 }
 

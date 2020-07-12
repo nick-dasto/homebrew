@@ -1,11 +1,25 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { BrewContext } from "../context/BrewContext";
 
 function Entry({ b }) {
   const [open, setOpen] = useState(false);
+  const {brew, setBrew} = useContext(BrewContext)
+  const {setStep} = useContext(BrewContext)
+  const {setCreate} = useContext(BrewContext)
+  const {setEdit} = useContext(BrewContext)
+  const {setIndex} = useContext(BrewContext)
 
   const handleEdit = () => {
-    setOpen(true);
-    // setStep(b)
+    setEdit(true);
+    setIndex(brew.indexOf(b))
+    setCreate(true);
+    setStep(b)
+  };
+
+  const handleDelete = () => {
+    // const newBrew = brew.filter((brews) => brews !== b)
+        setBrew(brew.filter((brews) => brews !== b))
+        setOpen(!open)
   };
 
   return open ? (
@@ -126,7 +140,7 @@ function Entry({ b }) {
       <button className="edit" onClick={handleEdit}>
         Edit
       </button>
-      <button className="delete" onClick={() => setOpen(!open)}>
+      <button className="delete" onClick={handleDelete}>
         Delete
       </button>
     </div>

@@ -1,4 +1,4 @@
-const info = [
+export const testBrews = [
   {
     stage: 1,
     generalInfo: {
@@ -61,4 +61,33 @@ const info = [
   },
 ];
 
-export default info;
+export const formData = {
+  stage: 1,
+  generalInfo: {
+    name: "",
+    batchSize: "",
+    batchType: "",
+    batchNumber: "",
+    ibu: "",
+    srm: "",
+    abv: "",
+    origionalGravity: "",
+    finalGravity: "",
+    brewingDate: "",
+    dateSecondary: "",
+    dateBottling: "",
+  },
+  ingredients: "",
+  brewingNotes: "",
+  hopsNotes: "",
+  yeastNotes: "",
+  fermentationNotes: "",
+  keggingNotes: "",
+  tastingNotes: {
+    appreance: "",
+    aroma: "",
+    flavor: "",
+    bitterness: "",
+  },
+  additionalNotes: "",
+}

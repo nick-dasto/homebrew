@@ -37,13 +37,14 @@ function StepTwo({ next, prev, handleChangeHydrometer }) {
             onChange={handleChangeHydrometer}
           />
         </div>
-        <button className="prev" onClick={prev}>
+
+      </form>
+      <button className="prev" onClick={prev}>
           Prev
         </button>
         <button className="next" onClick={next}>
           Next
         </button>
-      </form>
     </div>
   );
 }

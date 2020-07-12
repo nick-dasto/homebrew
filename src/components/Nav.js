@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faPlusCircle,
-  faBeer,
-  faAward,
+  faBeer
 } from "@fortawesome/free-solid-svg-icons";
 import "./Nav.css";
+import { BrewContext } from "../context/BrewContext";
 
-function Nav({ create, setCreate }) {
+function Nav() {
+const {create, setCreate} = useContext(BrewContext)
+
   return (
     <header>
       <h1 className="title">
