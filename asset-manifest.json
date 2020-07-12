@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/homebrew/static/css/main.ffa5dc5c.chunk.css",
+    "main.js": "/homebrew/static/js/main.490249c0.chunk.js",
+    "main.js.map": "/homebrew/static/js/main.490249c0.chunk.js.map",
+    "runtime-main.js": "/homebrew/static/js/runtime-main.b771cedc.js",
+    "runtime-main.js.map": "/homebrew/static/js/runtime-main.b771cedc.js.map",
+    "static/js/2.412dc80b.chunk.js": "/homebrew/static/js/2.412dc80b.chunk.js",
+    "static/js/2.412dc80b.chunk.js.map": "/homebrew/static/js/2.412dc80b.chunk.js.map",
+    "index.html": "/homebrew/index.html",
+    "precache-manifest.96b5b57853e0cf9b2354ef773a46bceb.js": "/homebrew/precache-manifest.96b5b57853e0cf9b2354ef773a46bceb.js",
+    "service-worker.js": "/homebrew/service-worker.js",
+    "static/css/main.ffa5dc5c.chunk.css.map": "/homebrew/static/css/main.ffa5dc5c.chunk.css.map",
+    "static/js/2.412dc80b.chunk.js.LICENSE.txt": "/homebrew/static/js/2.412dc80b.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/homebrew/static/media/beer.db87f8a4.jpg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.b771cedc.js",
+    "static/js/2.412dc80b.chunk.js",
+    "static/css/main.ffa5dc5c.chunk.css",
+    "static/js/main.490249c0.chunk.js"
+  ]
+}
