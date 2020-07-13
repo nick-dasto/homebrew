@@ -1,4 +1,20 @@
 import React from "react";
+import {
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  CardActions,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 function StepFour({
   step,
@@ -7,82 +23,86 @@ function StepFour({
   handleChangeIngredients,
   handleSubmit,
 }) {
+  const classes = useStyles();
   return (
-    <div className="form-container">
-      <h1>Notes</h1>
-      <form>
-        <div className="label-group">
-          <label>Ingredients:</label>
-          <input
-            type="text"
+    <Card className="form-container">
+      <CardContent>
+        <h1>Notes</h1>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField
+            id="standard-basic"
+            label="Ingerdients"
+            helperText="Seperate each item with a comma"
+            multiline
             name="ingredients"
             value={step.ingredients}
             onChange={handleChangeIngredients}
           />
-        </div>
-        <div className="label-group">
-          <label>Brewing Notes:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Brewing Notes"
             name="brewingNotes"
             value={step.brewingNotes}
             onChange={handleChange}
           />
-        </div>
-        <div className="label-group">
-          <label>Hops Notes:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Hops Notes"
             name="hopsNotes"
             value={step.hopsNotes}
             onChange={handleChange}
           />
-        </div>
-        <div className="label-group">
-          <label>Yeast Notes:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Yeast Notes"
             name="yeastNotes"
             value={step.yeastNotes}
             onChange={handleChange}
           />
-        </div>
-        <div className="label-group">
-          <label>Fermentation Notes:</label>
-          <input
-            type="text"
+
+          <TextField
+            id="standard-basic"
+            label="Fermentation Notes"
             name="fermentationNotes"
             value={step.fermentationNotes}
             onChange={handleChange}
           />
-        </div>
-        <div className="label-group">
-          <label>Kegging Notes:</label>
-          <input
-            type="text"
+
+          <TextField
+            id="standard-basic"
+            label="Kegging Notes"
             name="keggingNotes"
             value={step.keggingNotes}
             onChange={handleChange}
           />
-        </div>
-        <div className="label-group">
-          <label>Additional Notes:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Additional Notes"
             name="additionalNotes"
             value={step.additionalNotes}
             onChange={handleChange}
           />
-        </div>
-
-      </form>
-      <button className="prev" onClick={prev}>
+        </form>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="contained"
+          color="primary"
+          className="prev"
+          onClick={prev}
+        >
           Prev
-        </button>
-        <button className="save" onClick={handleSubmit}>
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className="save"
+          onClick={handleSubmit}
+        >
           Save
-        </button>
-    </div>
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 

@@ -1,55 +1,84 @@
 import React from "react";
+import {
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  CardActions,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
 
 function StepThree({ step, next, prev, handleChangeTasting }) {
+  const classes = useStyles();
   return (
-    <div className="form-container">
-      <h1>Tasting</h1>
-      <form>
-        <div className="label-group">
-          <label>Appearance:</label>
-          <input
-            type="text"
+    <Card className="form-container">
+      <CardContent>
+        <h1>Tasting</h1>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField
+            id="standard-basic"
+            label="Appearance"
             name="appreance"
             value={step.tastingNotes.appreance}
             onChange={handleChangeTasting}
           />
-        </div>
-        <div className="label-group">
-          <label>Aroma:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Aroma"
             name="aroma"
             value={step.tastingNotes.aroma}
             onChange={handleChangeTasting}
           />
-        </div>
-        <div className="label-group">
-          <label>Flavor:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Flavor"
             name="flavor"
             value={step.tastingNotes.flavor}
             onChange={handleChangeTasting}
           />
-        </div>
-        <div className="label-group">
-          <label>Bitterness:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Bitterness"
             name="bitterness"
             value={step.tastingNotes.bitterness}
             onChange={handleChangeTasting}
           />
-        </div>
-
-      </form>
-      <button className="prev" onClick={prev}>
+          <TextField
+            id="standard-basic"
+            label="Consumer Rating"
+            name="consumerRating"
+            value={step.tastingNotes.consumerRating}
+            onChange={handleChangeTasting}
+          />
+        </form>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="contained"
+          color="primary"
+          className="prev"
+          onClick={prev}
+        >
           Prev
-        </button>
-        <button className="next" onClick={next}>
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className="next"
+          onClick={next}
+        >
           Next
-        </button>
-    </div>
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 

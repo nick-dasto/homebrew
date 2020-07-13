@@ -1,124 +1,134 @@
 import React from "react";
+import {
+  Button,
+  TextField,
+  Card,
+  CardContent,
+  CardActions,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 
-function StepOne({ step, next, handleChangeGeneral }) {
+const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
+}));
+
+function StepOne({ step, next, prev, handleChangeGeneral }) {
+  const classes = useStyles();
   return (
-    <div className="form-container">
-      <h1>General Info</h1>
-      <form>
-        <div className="label-group">
-          <label>Name:</label>
-          <input
-            type="text"
+    <Card className="form-container">
+      <CardContent>
+        <h1>General Info</h1>
+        <form className={classes.root} noValidate autoComplete="off">
+          <TextField
+            id="standard-basic"
+            label="Name"
             name="name"
             value={step.generalInfo.name}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Batch Size:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Batch Size"
             name="batchSize"
             value={step.generalInfo.batchSize}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Batch Type:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Batch Type"
             name="batchType"
             value={step.generalInfo.batchType}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Batch Number:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Batch Number"
             name="batchNumber"
             value={step.generalInfo.batchNumber}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>IBU:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="IBU"
             name="ibu"
             value={step.generalInfo.ibu}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>SRM:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="SRM"
             name="srm"
             value={step.generalInfo.srm}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>ABV:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="ABV"
             name="abv"
             value={step.generalInfo.abv}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Origional Gravity:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Origional Gravity"
             name="origionalGravity"
             value={step.generalInfo.origionalGravity}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Final Gravity:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Final Gravity"
             name="finalGravity"
             value={step.generalInfo.finalGravity}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Brewing Date:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Brewing Date"
             name="brewingDate"
             value={step.generalInfo.brewingDate}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Secondary Date:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Secondary Date"
             name="dateSecondary"
             value={step.generalInfo.dateSecondary}
             onChange={handleChangeGeneral}
           />
-        </div>
-        <div className="label-group">
-          <label>Bottling Date:</label>
-          <input
-            type="text"
+          <TextField
+            id="standard-basic"
+            label="Bottling Date"
             name="dateBottling"
             value={step.generalInfo.dateBottling}
             onChange={handleChangeGeneral}
           />
-        </div>
-
-      </form>
-      <button className="next" onClick={next}>
+        </form>
+      </CardContent>
+      <CardActions>
+        <Button
+          variant="contained"
+          color="primary"
+          disabled
+          className="prev"
+          onClick={prev}
+        >
+          Prev
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className="next"
+          onClick={next}
+        >
           Next
-        </button>
-    </div>
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 

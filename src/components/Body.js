@@ -1,24 +1,38 @@
-import React, {useContext} from 'react'
+import React, { useContext } from "react";
 import Entry from "./Entry";
+import View from "./View";
 import Form from "./Form";
 import { BrewContext } from "../context/BrewContext";
-
+import { Grid } from "@material-ui/core";
 
 function Body() {
-    const {create, brew} = useContext(BrewContext)
+  const { create, brew, open } = useContext(BrewContext);
+
+  if (create) {
     return (
-        <>
-        {create ? (
-        <Form />
-      ) : (
-        <div className="entry-container">
-          {brew.map((b) => (
+      <Grid container>
+        <Grid item xs={12}>
+          <Form />
+        </Grid>
+      </Grid>
+    );
+  } else if (open) {
+    return (
+      <Grid container>
+        <View />
+      </Grid>
+    );
+  } else {
+    return (
+      <Grid container spacing={2}>
+        {brew.map((b) => (
+          <Grid item xs={12} sm={6}>
             <Entry key={b.generalInfo.name} b={b} />
-          ))}
-        </div>
-      )}
-        </>
-    )
+          </Grid>
+        ))}
+      </Grid>
+    );
+  }
 }
 
-export default Body
+export default Body;

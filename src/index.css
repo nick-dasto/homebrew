@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+}
+
+/* 
 *,
 *::before,
 *::after {
@@ -96,7 +101,6 @@ body {
 .page.one {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1.5fr 1.5fr 2fr;
-  /* display: none; */
 }
 .general-info {
   grid-column: 1 / span 2;
@@ -145,7 +149,6 @@ body {
 .page.two {
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 2fr 1fr 1fr 1fr 1fr 1fr;
-  /* display: none; */
 }
 .hop-notes {
   grid-column: 1;
@@ -252,3 +255,4 @@ button:hover {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+*/
