@@ -10,14 +10,54 @@ import {
   ListItemText,
   ListItemIcon,
 } from "@material-ui/core";
-import FiberManualRecordIcon from "@material-ui/icons/FiberManualRecord";
+import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: theme.palette.warning.light,
+    backgroundColor: "#f8f8ff",
+    boxShadow:
+      "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
     padding: "1rem",
     borderRadius: "10px",
+  },
+  section: {
+    padding: "1rem",
+    minHeight: "75px",
+  },
+  sectionTitle: {
+    textDecoration: "underline",
+    fontWeight: "bold",
+  },
+  sectionSubTitle: {
+    fontWeight: "bold",
+    paddingRight: "1rem",
+  },
+  list: {
+    overflow: "auto",
+    maxHeight: "290px",
+  },
+  buttonCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonYellow: {
+    margin: "0rem .5rem",
+  },
+  buttonGreen: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.success.main,
+    "&:hover": {
+      backgroundColor: theme.palette.success.light,
+    },
+  },
+  buttonRed: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.error.main,
+    "&:hover": {
+      backgroundColor: theme.palette.error.light,
+    },
   },
 }));
 
@@ -30,7 +70,6 @@ function View() {
     setEdit,
     setIndex,
     selectedBrew,
-    setSelectedBrew,
     open,
     setOpen,
   } = useContext(BrewContext);
@@ -54,61 +93,79 @@ function View() {
     <Grid container spacing={1} className={classes.container}>
       <Grid container item spacing={1} sm={12} md={6} className="page one">
         <Grid item xs={12}>
-          <Card className="general-info">
-            <Typography variant="h4">General Info</Typography>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              General Info
+            </Typography>
             <Grid container>
               <Grid item xs={12} sm={6}>
-                <List className="general-info-col-one">
-                  <ListItem className="label-and-input">
-                    <label>Name:</label>
+                <List>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>Name:</label>
                     <p>{selectedBrew.generalInfo.name}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Batch Size:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Batch Size:
+                    </label>
                     <p>{selectedBrew.generalInfo.batchSize}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Batch Type:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Batch Type:
+                    </label>
                     <p>{selectedBrew.generalInfo.batchType}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Batch Number:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Batch Number:
+                    </label>
                     <p>{selectedBrew.generalInfo.batchNumber}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>IBU:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>IBU:</label>
                     <p>{selectedBrew.generalInfo.ibu}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>ABV:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>ABV:</label>
                     <p>{selectedBrew.generalInfo.abv}</p>
                   </ListItem>
                 </List>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <List className="general-info-col-two">
-                  <ListItem className="label-and-input">
-                    <label>Original Gravity:</label>
+                <List>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Original Gravity:
+                    </label>
                     <p>{selectedBrew.generalInfo.origionalGravity}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Final Gravity:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Final Gravity:
+                    </label>
                     <p>{selectedBrew.generalInfo.finalGravity}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Brewing Date:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Brewing Date:
+                    </label>
                     <p>{selectedBrew.generalInfo.brewingDate}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Second date:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Second date:
+                    </label>
                     <p>{selectedBrew.generalInfo.dateSecondary}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>Bottling Date:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>
+                      Bottling Date:
+                    </label>
                     <p>{selectedBrew.generalInfo.dateBottling}</p>
                   </ListItem>
-                  <ListItem className="label-and-input">
-                    <label>SRM:</label>
+                  <ListItem>
+                    <label className={classes.sectionSubTitle}>SRM:</label>
                     <p>{selectedBrew.generalInfo.srm}</p>
                   </ListItem>
                 </List>
@@ -116,89 +173,110 @@ function View() {
             </Grid>
           </Card>
         </Grid>
-        <Grid item xs={12}>
-          <Card className="ingredients">
-            <Typography variant="h4">Ingredients</Typography>
-            <List>
-              {selectedBrew.ingredients.split(",").map((i) => (
-                <ListItem>
-                  <ListItemIcon>
-                    <FiberManualRecordIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={i} />
-                </ListItem>
-              ))}
+        <Grid item xs={12} sm={6}>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Ingredients
+            </Typography>
+            <List className={classes.list}>
+              {selectedBrew.ingredients
+                .trim()
+                .split(",")
+                .map((i) => (
+                  <ListItem>
+                    <ListItemIcon>
+                      <ArrowRightIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={i} />
+                  </ListItem>
+                ))}
             </List>
           </Card>
         </Grid>
-        <Grid item xs={12}>
-          <Card className="brewing-notes">
-            <Typography variant="h4">Brewing Notes</Typography>
+        <Grid item xs={12} sm={6}>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Brewing Notes
+            </Typography>
             <p>{selectedBrew.brewingNotes}</p>
           </Card>
         </Grid>
       </Grid>
       <Grid container item spacing={1} sm={12} md={6} className="page two">
         <Grid item xs={12} sm={6}>
-          <Card className="hop-notes">
-            <Typography variant="h4">Hops Notes</Typography>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Hops Notes
+            </Typography>
             <p>{selectedBrew.hopsNotes}</p>
           </Card>
         </Grid>
         <Grid item xs={12} sm={6}>
-          <Card className="yeast-notes">
-            <Typography variant="h4">Yeast Notes</Typography>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Yeast Notes
+            </Typography>
             <p>{selectedBrew.yeastNotes}</p>
           </Card>
         </Grid>
-        <Grid item xs={12}>
-          <Card className="fermentation-notes">
-            <Typography variant="h4">Fermentation Notes</Typography>
+        <Grid item xs={12} sm={6}>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Fermentation Notes
+            </Typography>
             <p>{selectedBrew.fermentationNotes}</p>
           </Card>
         </Grid>
-        <Grid item xs={12}>
-          <Card className="kegging">
-            <Typography variant="h4">Kegging Notes</Typography>
+        <Grid item xs={12} sm={6}>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Kegging Notes
+            </Typography>
             <p>{selectedBrew.keggingNotes}</p>
           </Card>
         </Grid>
-        <Grid item xs={12} sm={6}>
-          <Card className="tasting-notes">
-            <Typography variant="h4">Tasting Notes</Typography>
-            <Grid item className="label-and-input">
-              <label>Appearance:</label>
+        <Grid item xs={12}>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Tasting Notes
+            </Typography>
+            <ListItem>
+              <label className={classes.sectionSubTitle}>Appearance:</label>
               <p>{selectedBrew.tastingNotes.appreance}</p>
-            </Grid>
-            <Grid item className="label-and-input">
-              <label>Aroma:</label>
+            </ListItem>
+            <ListItem>
+              <label className={classes.sectionSubTitle}>Aroma:</label>
               <p>{selectedBrew.tastingNotes.aroma}</p>
-            </Grid>
-            <Grid item className="label-and-input">
-              <label>Flavor:</label>
+            </ListItem>
+            <ListItem>
+              <label className={classes.sectionSubTitle}>Flavor:</label>
               <p>{selectedBrew.tastingNotes.flavor}</p>
-            </Grid>
-            <Grid item className="label-and-input">
-              <label>Bitterness:</label>
+            </ListItem>
+            <ListItem>
+              <label className={classes.sectionSubTitle}>Bitterness:</label>
               <p>{selectedBrew.tastingNotes.bitterness}</p>
-            </Grid>
-            <Grid item className="label-and-input">
-              <label>Consumer Rating:</label>
+            </ListItem>
+            <ListItem>
+              <label className={classes.sectionSubTitle}>
+                Consumer Rating:
+              </label>
               <p>{selectedBrew.tastingNotes.consumerRating}</p>
-            </Grid>
-          </Card>
-        </Grid>
-        <Grid item xs={12} sm={6}>
-          <Card className="additional-notes">
-            <Typography variant="h4">Additional Notes</Typography>
-            <p>{selectedBrew.additionalNotes}</p>
+            </ListItem>
           </Card>
         </Grid>
         <Grid item xs={12}>
+          <Card className={classes.section}>
+            <Typography variant="h5" className={classes.sectionTitle}>
+              Additional Notes
+            </Typography>
+            <p>{selectedBrew.additionalNotes}</p>
+          </Card>
+        </Grid>
+        <Grid item xs={12} className={classes.buttonCenter}>
           <Button
             variant="contained"
-            color="primary"
-            className="close"
+            color="abs"
+            className={classes.buttonYellow}
             onClick={() => setOpen(!open)}
           >
             Close
@@ -206,7 +284,7 @@ function View() {
           <Button
             variant="contained"
             color="primary"
-            className="edit"
+            className={classes.buttonGreen}
             onClick={handleEdit}
           >
             Edit
@@ -214,7 +292,7 @@ function View() {
           <Button
             variant="contained"
             color="primary"
-            className="delete"
+            className={classes.buttonRed}
             onClick={handleDelete}
           >
             Delete

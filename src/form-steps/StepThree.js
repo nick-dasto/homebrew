@@ -14,12 +14,37 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  container: {
+    backgroundColor: "#f8f8ff",
+  },
+  buttonCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonYellow: {
+    margin: "0rem .5rem",
+  },
+  buttonGreen: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.success.main,
+    "&:hover": {
+      backgroundColor: theme.palette.success.light,
+    },
+  },
+  buttonRed: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.error.main,
+    "&:hover": {
+      backgroundColor: theme.palette.error.light,
+    },
+  },
 }));
 
 function StepThree({ step, next, prev, handleChangeTasting }) {
   const classes = useStyles();
   return (
-    <Card className="form-container">
+    <Card className={classes.container}>
       <CardContent>
         <h1>Tasting</h1>
         <form className={classes.root} noValidate autoComplete="off">
@@ -54,17 +79,18 @@ function StepThree({ step, next, prev, handleChangeTasting }) {
           <TextField
             id="standard-basic"
             label="Consumer Rating"
+            helperText="What do people think of it?"
             name="consumerRating"
             value={step.tastingNotes.consumerRating}
             onChange={handleChangeTasting}
           />
         </form>
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.buttonCenter}>
         <Button
           variant="contained"
-          color="primary"
-          className="prev"
+          color="abc"
+          className={classes.buttonYellow}
           onClick={prev}
         >
           Prev
@@ -72,7 +98,7 @@ function StepThree({ step, next, prev, handleChangeTasting }) {
         <Button
           variant="contained"
           color="primary"
-          className="next"
+          className={classes.buttonGreen}
           onClick={next}
         >
           Next

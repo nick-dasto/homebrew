@@ -30,7 +30,6 @@ function Nav() {
         <Button
           variant="contained"
           size="large"
-          className={create ? "add-new rotate" : "add-new"}
           startIcon={!create ? <AddIcon /> : <CloseIcon />}
           onClick={() => setCreate(!create)}
         >

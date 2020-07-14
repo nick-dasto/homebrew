@@ -14,12 +14,37 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  container: {
+    backgroundColor: "#f8f8ff",
+  },
+  buttonCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonYellow: {
+    margin: "0rem .5rem",
+  },
+  buttonGreen: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.success.main,
+    "&:hover": {
+      backgroundColor: theme.palette.success.light,
+    },
+  },
+  buttonRed: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.error.main,
+    "&:hover": {
+      backgroundColor: theme.palette.error.light,
+    },
+  },
 }));
 
 function StepOne({ step, next, prev, handleChangeGeneral }) {
   const classes = useStyles();
   return (
-    <Card className="form-container">
+    <Card className={classes.container}>
       <CardContent>
         <h1>General Info</h1>
         <form className={classes.root} noValidate autoComplete="off">
@@ -109,12 +134,12 @@ function StepOne({ step, next, prev, handleChangeGeneral }) {
           />
         </form>
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.buttonCenter}>
         <Button
           variant="contained"
           color="primary"
           disabled
-          className="prev"
+          className={classes.buttonYellow}
           onClick={prev}
         >
           Prev
@@ -122,7 +147,7 @@ function StepOne({ step, next, prev, handleChangeGeneral }) {
         <Button
           variant="contained"
           color="primary"
-          className="next"
+          className={classes.buttonGreen}
           onClick={next}
         >
           Next

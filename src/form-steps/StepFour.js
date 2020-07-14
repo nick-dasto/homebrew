@@ -14,6 +14,31 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
+  container: {
+    backgroundColor: "#f8f8ff",
+  },
+  buttonCenter: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonYellow: {
+    margin: "0rem .5rem",
+  },
+  buttonGreen: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.success.main,
+    "&:hover": {
+      backgroundColor: theme.palette.success.light,
+    },
+  },
+  buttonRed: {
+    margin: "0rem .5rem",
+    backgroundColor: theme.palette.error.main,
+    "&:hover": {
+      backgroundColor: theme.palette.error.light,
+    },
+  },
 }));
 
 function StepFour({
@@ -25,14 +50,14 @@ function StepFour({
 }) {
   const classes = useStyles();
   return (
-    <Card className="form-container">
+    <Card className={classes.container}>
       <CardContent>
         <h1>Notes</h1>
         <form className={classes.root} noValidate autoComplete="off">
           <TextField
             id="standard-basic"
             label="Ingerdients"
-            helperText="Seperate each item with a comma"
+            helperText='Seperate each item with a ","'
             multiline
             name="ingredients"
             value={step.ingredients}
@@ -41,6 +66,7 @@ function StepFour({
           <TextField
             id="standard-basic"
             label="Brewing Notes"
+            multiline
             name="brewingNotes"
             value={step.brewingNotes}
             onChange={handleChange}
@@ -48,6 +74,7 @@ function StepFour({
           <TextField
             id="standard-basic"
             label="Hops Notes"
+            multiline
             name="hopsNotes"
             value={step.hopsNotes}
             onChange={handleChange}
@@ -55,6 +82,7 @@ function StepFour({
           <TextField
             id="standard-basic"
             label="Yeast Notes"
+            multiline
             name="yeastNotes"
             value={step.yeastNotes}
             onChange={handleChange}
@@ -63,6 +91,7 @@ function StepFour({
           <TextField
             id="standard-basic"
             label="Fermentation Notes"
+            multiline
             name="fermentationNotes"
             value={step.fermentationNotes}
             onChange={handleChange}
@@ -71,6 +100,7 @@ function StepFour({
           <TextField
             id="standard-basic"
             label="Kegging Notes"
+            multiline
             name="keggingNotes"
             value={step.keggingNotes}
             onChange={handleChange}
@@ -78,17 +108,18 @@ function StepFour({
           <TextField
             id="standard-basic"
             label="Additional Notes"
+            multiline
             name="additionalNotes"
             value={step.additionalNotes}
             onChange={handleChange}
           />
         </form>
       </CardContent>
-      <CardActions>
+      <CardActions className={classes.buttonCenter}>
         <Button
           variant="contained"
-          color="primary"
-          className="prev"
+          color="abc"
+          className={classes.buttonYellow}
           onClick={prev}
         >
           Prev
@@ -96,7 +127,7 @@ function StepFour({
         <Button
           variant="contained"
           color="primary"
-          className="save"
+          className={classes.buttonGreen}
           onClick={handleSubmit}
         >
           Save
