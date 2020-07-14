@@ -41,8 +41,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StepOne({ step, next, prev, handleChangeGeneral }) {
+function StepOne({ step, next, prev, handleChangeGeneral, returnABV }) {
   const classes = useStyles();
+
   return (
     <Card className={classes.container}>
       <CardContent>
@@ -77,8 +78,35 @@ function StepOne({ step, next, prev, handleChangeGeneral }) {
             onChange={handleChangeGeneral}
           />
           <TextField
+            id="standard-uncontrolled"
+            label="Original Gravity"
+            name="originalGravity"
+            error={
+              step.generalInfo.originalGravity.match(/^[+-]?\d+(\.\d+)?$/)
+                ? false
+                : true
+            }
+            helperText="Input must be a number or decimal"
+            value={step.generalInfo.originalGravity}
+            onChange={handleChangeGeneral}
+          />
+          <TextField
+            id="standard-uncontrolled"
+            label="Final Gravity"
+            helperText="Input must be a number or decimal"
+            name="finalGravity"
+            error={
+              step.generalInfo.finalGravity.match(/^[+-]?\d+(\.\d+)?$/)
+                ? false
+                : true
+            }
+            value={step.generalInfo.finalGravity}
+            onChange={handleChangeGeneral}
+          />
+          <TextField
             id="standard-basic"
             label="IBU"
+            helperText="International Bittering Units"
             name="ibu"
             value={step.generalInfo.ibu}
             onChange={handleChangeGeneral}
@@ -86,44 +114,42 @@ function StepOne({ step, next, prev, handleChangeGeneral }) {
           <TextField
             id="standard-basic"
             label="SRM"
+            helperText="Standard Reference Method"
             name="srm"
             value={step.generalInfo.srm}
             onChange={handleChangeGeneral}
           />
           <TextField
-            id="standard-basic"
+            id="standard-read-only-input"
             label="ABV"
+            helperText="Alcohol By Volume"
             name="abv"
-            value={step.generalInfo.abv}
-            onChange={handleChangeGeneral}
+            value={returnABV()}
+            InputProps={{
+              readOnly: true,
+            }}
           />
           <TextField
-            id="standard-basic"
-            label="Origional Gravity"
-            name="origionalGravity"
-            value={step.generalInfo.origionalGravity}
-            onChange={handleChangeGeneral}
-          />
-          <TextField
-            id="standard-basic"
-            label="Final Gravity"
-            name="finalGravity"
-            value={step.generalInfo.finalGravity}
-            onChange={handleChangeGeneral}
-          />
-          <TextField
-            id="standard-basic"
+            id="date"
             label="Brewing Date"
+            type="date"
             name="brewingDate"
             value={step.generalInfo.brewingDate}
             onChange={handleChangeGeneral}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
-            id="standard-basic"
+            id="date"
             label="Secondary Date"
+            type="date"
             name="dateSecondary"
             value={step.generalInfo.dateSecondary}
             onChange={handleChangeGeneral}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
           <TextField
             id="standard-basic"
@@ -137,7 +163,6 @@ function StepOne({ step, next, prev, handleChangeGeneral }) {
       <CardActions className={classes.buttonCenter}>
         <Button
           variant="contained"
-          color="primary"
           disabled
           className={classes.buttonYellow}
           onClick={prev}

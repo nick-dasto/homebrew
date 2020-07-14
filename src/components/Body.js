@@ -26,8 +26,8 @@ function Body() {
     return (
       <Grid container spacing={2}>
         {brew.map((b) => (
-          <Grid item xs={12} sm={6}>
-            <Entry key={b.generalInfo.name} b={b} />
+          <Grid item xs={12} sm={6} key={b.generalInfo.name}>
+            <Entry b={b} />
           </Grid>
         ))}
       </Grid>

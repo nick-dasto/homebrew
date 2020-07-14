@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext } from "react";
 import { BrewContext } from "../context/BrewContext";
 import {
   Button,
@@ -9,6 +9,10 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
 } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
@@ -62,6 +66,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function View() {
+  const [prompt, setPrompt] = useState(false);
+  const handlePromptShow = () => {
+    setPrompt(true);
+  };
+
+  const handlePromptClose = () => {
+    setPrompt(false);
+  };
+
   const {
     brew,
     setBrew,
@@ -80,14 +93,27 @@ function View() {
     setEdit(true);
     setIndex(brew.indexOf(selectedBrew));
     setCreate(true);
-    setStep(selectedBrew);
+    const newIngredients = selectedBrew.ingredients.filter(Boolean);
+    setStep({ ...selectedBrew, ingredients: newIngredients });
   };
 
   const handleDelete = () => {
     // const newBrew = brew.filter((brews) => brews !== b)
     setBrew(brew.filter((brews) => brews !== selectedBrew));
+    setPrompt(false);
     setOpen(!open);
   };
+  const calcABV =
+    parseFloat(selectedBrew.generalInfo.originalGravity) < 0.0000001 ||
+    parseFloat(selectedBrew.generalInfo.finalGravity) < 0.0000001
+      ? "0%"
+      : `${Number(
+          (
+            (parseFloat(selectedBrew.generalInfo.originalGravity) -
+              parseFloat(selectedBrew.generalInfo.finalGravity)) *
+            131.25
+          ).toFixed(2)
+        )}%`;
 
   return (
     <Grid container spacing={1} className={classes.container}>
@@ -128,7 +154,7 @@ function View() {
                   </ListItem>
                   <ListItem>
                     <label className={classes.sectionSubTitle}>ABV:</label>
-                    <p>{selectedBrew.generalInfo.abv}</p>
+                    <p>{calcABV}</p>
                   </ListItem>
                 </List>
               </Grid>
@@ -138,7 +164,7 @@ function View() {
                     <label className={classes.sectionSubTitle}>
                       Original Gravity:
                     </label>
-                    <p>{selectedBrew.generalInfo.origionalGravity}</p>
+                    <p>{selectedBrew.generalInfo.originalGravity}</p>
                   </ListItem>
                   <ListItem>
                     <label className={classes.sectionSubTitle}>
@@ -179,17 +205,14 @@ function View() {
               Ingredients
             </Typography>
             <List className={classes.list}>
-              {selectedBrew.ingredients
-                .trim()
-                .split(",")
-                .map((i) => (
-                  <ListItem>
-                    <ListItemIcon>
-                      <ArrowRightIcon />
-                    </ListItemIcon>
-                    <ListItemText primary={i} />
-                  </ListItem>
-                ))}
+              {selectedBrew.ingredients.filter(Boolean).map((i, index) => (
+                <ListItem key={index}>
+                  <ListItemIcon>
+                    <ArrowRightIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={i} />
+                </ListItem>
+              ))}
             </List>
           </Card>
         </Grid>
@@ -238,11 +261,11 @@ function View() {
         <Grid item xs={12}>
           <Card className={classes.section}>
             <Typography variant="h5" className={classes.sectionTitle}>
-              Tasting Notes
+              Finished Product
             </Typography>
             <ListItem>
               <label className={classes.sectionSubTitle}>Appearance:</label>
-              <p>{selectedBrew.tastingNotes.appreance}</p>
+              <p>{selectedBrew.tastingNotes.appearance}</p>
             </ListItem>
             <ListItem>
               <label className={classes.sectionSubTitle}>Aroma:</label>
@@ -275,7 +298,6 @@ function View() {
         <Grid item xs={12} className={classes.buttonCenter}>
           <Button
             variant="contained"
-            color="abs"
             className={classes.buttonYellow}
             onClick={() => setOpen(!open)}
           >
@@ -293,10 +315,24 @@ function View() {
             variant="contained"
             color="primary"
             className={classes.buttonRed}
-            onClick={handleDelete}
+            onClick={handlePromptShow}
           >
             Delete
           </Button>
+          <Dialog open={prompt} onClose={handlePromptClose}>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete{" "}
+                {`${selectedBrew.generalInfo.name}`}?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handlePromptClose}>No</Button>
+              <Button color="primary" onClick={handleDelete}>
+                Yes
+              </Button>
+            </DialogActions>
+          </Dialog>
         </Grid>
       </Grid>
     </Grid>

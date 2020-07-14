@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import StepOne from "../form-steps/StepOne";
+import StepTwo from "../form-steps/StepTwo";
 import StepThree from "../form-steps/StepThree";
 import StepFour from "../form-steps/StepFour";
 import { BrewContext } from "../context/BrewContext";
@@ -34,11 +35,13 @@ function Form() {
       generalInfo: { ...state.generalInfo, [e.target.name]: e.target.value },
     }));
   };
-  const handleChangeIngredients = (e) => {
+  const handleChangeIngredients = (e, index) => {
     e.persist();
+    const newIngredients = [...step.ingredients];
+    newIngredients[index] = e.target.value;
     setStep((state) => ({
       ...state,
-      ingredients: e.target.value,
+      ingredients: newIngredients,
     }));
   };
   const handleChangeTasting = (e) => {
@@ -71,6 +74,23 @@ function Form() {
       setStep(formData);
     }
   };
+  const returnABV = () => {
+    if (
+      parseFloat(step.generalInfo.originalGravity) < 0.0000001 ||
+      parseFloat(step.generalInfo.finalGravity) < 0.0000001
+    ) {
+      return "0%";
+    } else {
+      const calcABV = `${Number(
+        (
+          (parseFloat(step.generalInfo.originalGravity) -
+            parseFloat(step.generalInfo.finalGravity)) *
+          131.25
+        ).toFixed(2)
+      )}%`;
+      return calcABV;
+    }
+  };
   switch (step.stage) {
     case 1:
       return (
@@ -79,9 +99,20 @@ function Form() {
           next={next}
           prev={prev}
           handleChangeGeneral={handleChangeGeneral}
+          returnABV={returnABV}
         />
       );
     case 2:
+      return (
+        <StepTwo
+          step={step}
+          setStep={setStep}
+          next={next}
+          prev={prev}
+          handleChangeIngredients={handleChangeIngredients}
+        />
+      );
+    case 3:
       return (
         <StepThree
           step={step}
@@ -90,14 +121,13 @@ function Form() {
           handleChangeTasting={handleChangeTasting}
         />
       );
-    case 3:
+    case 4:
       return (
         <StepFour
           step={step}
           next={next}
           prev={prev}
           handleChange={handleChange}
-          handleChangeIngredients={handleChangeIngredients}
           handleSubmit={handleSubmit}
         />
       );

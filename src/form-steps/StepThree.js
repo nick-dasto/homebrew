@@ -51,8 +51,8 @@ function StepThree({ step, next, prev, handleChangeTasting }) {
           <TextField
             id="standard-basic"
             label="Appearance"
-            name="appreance"
-            value={step.tastingNotes.appreance}
+            name="appearance"
+            value={step.tastingNotes.appearance}
             onChange={handleChangeTasting}
           />
           <TextField
@@ -77,7 +77,7 @@ function StepThree({ step, next, prev, handleChangeTasting }) {
             onChange={handleChangeTasting}
           />
           <TextField
-            id="standard-basic"
+            id="standard-uncontrolled"
             label="Consumer Rating"
             helperText="What do people think of it?"
             name="consumerRating"
@@ -89,7 +89,6 @@ function StepThree({ step, next, prev, handleChangeTasting }) {
       <CardActions className={classes.buttonCenter}>
         <Button
           variant="contained"
-          color="abc"
           className={classes.buttonYellow}
           onClick={prev}
         >

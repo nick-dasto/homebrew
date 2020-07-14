@@ -41,28 +41,13 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function StepFour({
-  step,
-  prev,
-  handleChange,
-  handleChangeIngredients,
-  handleSubmit,
-}) {
+function StepFour({ step, prev, handleChange, handleSubmit }) {
   const classes = useStyles();
   return (
     <Card className={classes.container}>
       <CardContent>
         <h1>Notes</h1>
         <form className={classes.root} noValidate autoComplete="off">
-          <TextField
-            id="standard-basic"
-            label="Ingerdients"
-            helperText='Seperate each item with a ","'
-            multiline
-            name="ingredients"
-            value={step.ingredients}
-            onChange={handleChangeIngredients}
-          />
           <TextField
             id="standard-basic"
             label="Brewing Notes"
@@ -118,7 +103,6 @@ function StepFour({
       <CardActions className={classes.buttonCenter}>
         <Button
           variant="contained"
-          color="abc"
           className={classes.buttonYellow}
           onClick={prev}
         >

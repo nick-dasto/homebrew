@@ -21,9 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function Entry({ b }) {
-  const { selectedBrew, setSelectedBrew, open, setOpen } = useContext(
-    BrewContext
-  );
+  const { setSelectedBrew, open, setOpen } = useContext(BrewContext);
   const classes = useStyles();
 
   return (
@@ -40,8 +38,6 @@ function Entry({ b }) {
           onClick={() => {
             setOpen(!open);
             setSelectedBrew(b);
-            console.log(selectedBrew);
-            console.log(open);
           }}
         >
           View
