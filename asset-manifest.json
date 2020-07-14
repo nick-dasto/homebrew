@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/homebrew/static/css/main.4c67b90c.chunk.css",
-    "main.js": "/homebrew/static/js/main.5adb6385.chunk.js",
-    "main.js.map": "/homebrew/static/js/main.5adb6385.chunk.js.map",
+    "main.js": "/homebrew/static/js/main.ba6fa93f.chunk.js",
+    "main.js.map": "/homebrew/static/js/main.ba6fa93f.chunk.js.map",
     "runtime-main.js": "/homebrew/static/js/runtime-main.b771cedc.js",
     "runtime-main.js.map": "/homebrew/static/js/runtime-main.b771cedc.js.map",
-    "static/js/2.e447bbfa.chunk.js": "/homebrew/static/js/2.e447bbfa.chunk.js",
-    "static/js/2.e447bbfa.chunk.js.map": "/homebrew/static/js/2.e447bbfa.chunk.js.map",
+    "static/js/2.252f7166.chunk.js": "/homebrew/static/js/2.252f7166.chunk.js",
+    "static/js/2.252f7166.chunk.js.map": "/homebrew/static/js/2.252f7166.chunk.js.map",
     "index.html": "/homebrew/index.html",
-    "precache-manifest.37bd2e4d9d3a72e563515c23c145e19d.js": "/homebrew/precache-manifest.37bd2e4d9d3a72e563515c23c145e19d.js",
+    "precache-manifest.d8ec18b9652560a61b6e79652885c4c0.js": "/homebrew/precache-manifest.d8ec18b9652560a61b6e79652885c4c0.js",
     "service-worker.js": "/homebrew/service-worker.js",
     "static/css/main.4c67b90c.chunk.css.map": "/homebrew/static/css/main.4c67b90c.chunk.css.map",
-    "static/js/2.e447bbfa.chunk.js.LICENSE.txt": "/homebrew/static/js/2.e447bbfa.chunk.js.LICENSE.txt"
+    "static/js/2.252f7166.chunk.js.LICENSE.txt": "/homebrew/static/js/2.252f7166.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.b771cedc.js",
-    "static/js/2.e447bbfa.chunk.js",
+    "static/js/2.252f7166.chunk.js",
     "static/css/main.4c67b90c.chunk.css",
-    "static/js/main.5adb6385.chunk.js"
+    "static/js/main.ba6fa93f.chunk.js"
   ]
 }
