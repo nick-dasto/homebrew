@@ -1,23 +1,23 @@
 import React, { useContext } from "react";
-import StepOne from "../form-steps/StepOne";
-import StepTwo from "../form-steps/StepTwo";
-import StepThree from "../form-steps/StepThree";
-import StepFour from "../form-steps/StepFour";
+import StepOne from "./form-steps/StepOne";
+import StepTwo from "./form-steps/StepTwo";
+import StepThree from "./form-steps/StepThree";
+import StepFour from "./form-steps/StepFour";
 import { BrewContext } from "../context/BrewContext";
 import { formData } from "../config";
 
 function Form() {
   const {
-    brew,
-    setBrew,
     create,
     setCreate,
     step,
     setStep,
     edit,
     setEdit,
-    index,
     setOpen,
+    addBrews,
+    editBrews,
+    selectedBrew,
   } = useContext(BrewContext);
 
   const next = () => {
@@ -55,21 +55,17 @@ function Form() {
     e.persist();
     setStep((state) => ({ ...state, [e.target.name]: e.target.value }));
   };
-  const submitEdit = (index, b) => {
-    const newBrew = [...brew];
-    newBrew[index] = { ...b, stage: 1 };
-    setBrew(newBrew);
-  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (edit) {
-      submitEdit(index, step);
+      editBrews(selectedBrew._id, step);
       setEdit(false);
       setCreate(!create);
       setOpen(false);
       setStep(formData);
     } else {
-      setBrew([...brew, { ...step, stage: 1 }]);
+      addBrews(step);
       setCreate(!create);
       setStep(formData);
     }

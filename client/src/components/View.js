@@ -77,7 +77,6 @@ function View() {
 
   const {
     brew,
-    setBrew,
     setStep,
     setCreate,
     setEdit,
@@ -85,6 +84,7 @@ function View() {
     selectedBrew,
     open,
     setOpen,
+    deleteBrews,
   } = useContext(BrewContext);
 
   const classes = useStyles();
@@ -99,7 +99,7 @@ function View() {
 
   const handleDelete = () => {
     // const newBrew = brew.filter((brews) => brews !== b)
-    setBrew(brew.filter((brews) => brews !== selectedBrew));
+    deleteBrews(selectedBrew._id);
     setPrompt(false);
     setOpen(!open);
   };
@@ -322,8 +322,8 @@ function View() {
           <Dialog open={prompt} onClose={handlePromptClose}>
             <DialogContent>
               <DialogContentText id="alert-dialog-description">
-                Are you sure you want to delete{" "}
-                {`${selectedBrew.generalInfo.name}`}?
+                {`Are you sure you want to delete
+              ${selectedBrew.generalInfo.name}?`}
               </DialogContentText>
             </DialogContent>
             <DialogActions>
