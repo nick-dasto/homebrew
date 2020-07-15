@@ -15,8 +15,6 @@ app.use(express.json());
 
 app.use("/api/v1/brews", brews);
 
-const PORT = process.env.PORT;
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
@@ -25,6 +23,8 @@ if (process.env.NODE_ENV === "production") {
 }
 
 app.listen(
-  PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
+  process.env.PORT || 5000,
+  console.log(
+    `Server running in ${process.env.NODE_ENV} mode on port ${process.env.PORT}`
+  )
 );
