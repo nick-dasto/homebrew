@@ -16,6 +16,10 @@ app.use("/api/v1/brews", brews);
 
 const PORT = process.env.PORT;
 
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
+
 app.listen(
   PORT,
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
