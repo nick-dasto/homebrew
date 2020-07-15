@@ -16,9 +16,8 @@ app.use("/api/v1/brews", brews);
 
 const PORT = process.env.PORT;
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production")
   app.use(express.static("client/build"));
-}
 
 app.listen(
   PORT,
