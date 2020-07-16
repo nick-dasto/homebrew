@@ -8,7 +8,6 @@ const connectDB = async () => {
       useCreateIndex: true,
       useUnifiedTopology: true,
     });
-
     console.log(`MongoDB Connected.`);
   } catch (err) {
     console.log(`Error: ${err.message}`);

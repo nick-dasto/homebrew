@@ -91,7 +91,8 @@ function View() {
     setEdit(true);
     setCreate(true);
     const newIngredients =
-      selectedBrew.ingredients.length === 0
+      selectedBrew.ingredients.length === 0 ||
+      selectedBrew.ingredients.filter(Boolean).length === 0
         ? ["", "", ""]
         : selectedBrew.ingredients.filter(Boolean);
     setStep({ ...selectedBrew, ingredients: newIngredients, stage: 1 });
