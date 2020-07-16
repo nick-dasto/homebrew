@@ -13,15 +13,10 @@
     "heroku-postbuild": "npm install && npm run install-client && npm run build"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://github.com/nick-dasto/homebrew.git"
+    "type": "git"
   },
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nick-dasto/homebrew/issues"
-  },
-  "homepage": "https://github.com/nick-dasto/homebrew#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
