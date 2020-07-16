@@ -1,5 +1,5 @@
 {
-  "name": "beerapp",
+  "name": "beerappbackend",
   "version": "1.0.0",
   "description": "Backend for beerapp",
   "main": "server.js",
