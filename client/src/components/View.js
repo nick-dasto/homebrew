@@ -76,11 +76,9 @@ function View() {
   };
 
   const {
-    brew,
     setStep,
     setCreate,
     setEdit,
-    setIndex,
     selectedBrew,
     open,
     setOpen,
@@ -91,10 +89,12 @@ function View() {
 
   const handleEdit = () => {
     setEdit(true);
-    setIndex(brew.indexOf(selectedBrew));
     setCreate(true);
-    const newIngredients = selectedBrew.ingredients.filter(Boolean);
-    setStep({ ...selectedBrew, ingredients: newIngredients });
+    const newIngredients =
+      selectedBrew.ingredients.length === 0
+        ? ["", "", ""]
+        : selectedBrew.ingredients.filter(Boolean);
+    setStep({ ...selectedBrew, ingredients: newIngredients, stage: 1 });
   };
 
   const handleDelete = () => {
