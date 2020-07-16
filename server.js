@@ -5,7 +5,7 @@ const path = require("path");
 
 dotenv.config({ path: "./config/config.env" });
 
-// connectDB();
+connectDB();
 
 const brews = require("./routes/brews");
 
