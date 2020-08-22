@@ -33,9 +33,9 @@ export const BrewProvider = (props) => {
         localStorage.setItem('x-auth-token', "")
         token = ""
       }
-      const tokenRes = await axios.post('http://localhost:5000/api/v1/users/tokenValid', null, {headers: {'x-auth-token':token}})
+      const tokenRes = await axios.post('/api/v1/users/tokenValid', null, {headers: {'x-auth-token':token}})
       if(tokenRes.data){
-        const userRes = await axios.get('http://localhost:5000/api/v1/users/', {headers: {'x-auth-token':token}})
+        const userRes = await axios.get('/api/v1/users/', {headers: {'x-auth-token':token}})
         setUserData({...userData, token, user:userRes.data})
         getBrews();
       }
@@ -45,7 +45,7 @@ export const BrewProvider = (props) => {
   }
   const getBrews = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/v1/brews", config);
+      const res = await axios.get("/api/v1/brews", config);
       setBrew(res.data);
     } catch (err) {
       console.log(err);
@@ -53,7 +53,7 @@ export const BrewProvider = (props) => {
   }
   const addBrews = async (newBrew) => {
     try {
-      await axios.post("http://localhost:5000/api/v1/brews", newBrew, configData);
+      await axios.post("/api/v1/brews", newBrew, configData);
       setSnackMessage(MESSAGE.ADD_BREW)
     } catch (err) {
       console.log(err);
@@ -61,7 +61,7 @@ export const BrewProvider = (props) => {
   }
   const deleteBrews = async (id) => {
     try {
-      await axios.delete(`http://localhost:5000/api/v1/brews/${id}`, config);
+      await axios.delete(`/api/v1/brews/${id}`, config);
       setSnackMessage(MESSAGE.DELETE_BREW)
     } catch (err) {
       console.log(err);
@@ -69,7 +69,7 @@ export const BrewProvider = (props) => {
   }
   const editBrews = async (id, newBrew) => {
     try {
-      await axios.patch(`http://localhost:5000/api/v1/brews/${id}`, newBrew, configData);
+      await axios.patch(`/api/v1/brews/${id}`, newBrew, configData);
       setSnackMessage(MESSAGE.EDIT_BREW)
     } catch (err) {
       console.log("edit brews error", err);
