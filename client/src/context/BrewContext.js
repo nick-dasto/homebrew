@@ -1,41 +1,88 @@
-import React, { useState, useEffect, createContext } from "react";
-import { testBrews, formData } from "../config";
+import React, { useState, createContext } from "react";
+import { MESSAGE, formData  } from "./AppReducer";
+import axios from 'axios'
 
 export const BrewContext = createContext();
 
 export const BrewProvider = (props) => {
-  const loadBrews = localStorage.getItem("brews");
-  const [brew, setBrew] = useState(
-    loadBrews !== null ? JSON.parse(loadBrews) : testBrews
-  );
+  const [brew, setBrew] = useState([]);
   const [create, setCreate] = useState(false);
   const [step, setStep] = useState(formData);
   const [edit, setEdit] = useState(false);
-  const [index, setIndex] = useState();
   const [selectedBrew, setSelectedBrew] = useState(null);
   const [open, setOpen] = useState(false);
+  const [snackMessage, setSnackMessage] = useState(undefined)
+  const [userData, setUserData] = useState({token: undefined, user: undefined})
 
-  useEffect(() => {
-    localStorage.setItem("brews", JSON.stringify(brew));
-  }, [brew]);
-
+  const config = {
+    headers: {
+        "x-auth-token": userData.token || localStorage.getItem('x-auth-token')
+    }
+ }
+  const configData = {
+      headers: {
+          'Content-Type':'application/json',
+          "x-auth-token": userData.token || localStorage.getItem('x-auth-token')
+      }
+  }
+  const checkLoggedIn = async () => {
+    try{
+      let token = localStorage.getItem('x-auth-token')
+      setUserData({...userData, token})
+      if(token === null){
+        localStorage.setItem('x-auth-token', "")
+        token = ""
+      }
+      const tokenRes = await axios.post('http://localhost:5000/api/v1/users/tokenValid', null, {headers: {'x-auth-token':token}})
+      if(tokenRes.data){
+        const userRes = await axios.get('http://localhost:5000/api/v1/users/', {headers: {'x-auth-token':token}})
+        setUserData({...userData, token, user:userRes.data})
+        getBrews();
+      }
+    }catch(err){
+      console.log(err)
+    }
+  }
+  const getBrews = async () => {
+    try {
+      const res = await axios.get("http://localhost:5000/api/v1/brews", config);
+      setBrew(res.data);
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const addBrews = async (newBrew) => {
+    try {
+      await axios.post("http://localhost:5000/api/v1/brews", newBrew, configData);
+      setSnackMessage(MESSAGE.ADD_BREW)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const deleteBrews = async (id) => {
+    try {
+      await axios.delete(`http://localhost:5000/api/v1/brews/${id}`, config);
+      setSnackMessage(MESSAGE.DELETE_BREW)
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  const editBrews = async (id, newBrew) => {
+    try {
+      await axios.patch(`http://localhost:5000/api/v1/brews/${id}`, newBrew, configData);
+      setSnackMessage(MESSAGE.EDIT_BREW)
+    } catch (err) {
+      console.log("edit brews error", err);
+    }
+  }
   return (
     <BrewContext.Provider
       value={{
-        brew,
-        setBrew,
-        create,
-        setCreate,
-        step,
-        setStep,
-        edit,
-        setEdit,
-        index,
-        setIndex,
-        selectedBrew,
-        setSelectedBrew,
-        open,
-        setOpen,
+        brew, setBrew, create, setCreate, step, setStep,
+        edit, setEdit, selectedBrew, setSelectedBrew,
+        open, setOpen, snackMessage, setSnackMessage,
+        userData, setUserData, config, configData, getBrews,
+        deleteBrews, addBrews, editBrews, checkLoggedIn
       }}
     >
       {props.children}

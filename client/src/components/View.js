@@ -66,6 +66,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 function View() {
+  const classes = useStyles();
   const [prompt, setPrompt] = useState(false);
   const handlePromptShow = () => {
     setPrompt(true);
@@ -75,31 +76,23 @@ function View() {
     setPrompt(false);
   };
 
-  const {
-    brew,
-    setBrew,
-    setStep,
-    setCreate,
-    setEdit,
-    setIndex,
-    selectedBrew,
-    open,
-    setOpen,
-  } = useContext(BrewContext);
-
-  const classes = useStyles();
+  const { setStep, setCreate, setEdit, selectedBrew,
+    open,setOpen, deleteBrews } = useContext(BrewContext);
 
   const handleEdit = () => {
     setEdit(true);
-    setIndex(brew.indexOf(selectedBrew));
     setCreate(true);
-    const newIngredients = selectedBrew.ingredients.filter(Boolean);
-    setStep({ ...selectedBrew, ingredients: newIngredients });
+    const newIngredients =
+      selectedBrew.ingredients.length === 0 ||
+      selectedBrew.ingredients.filter(Boolean).length === 0
+        ? ["", "", ""]
+        : selectedBrew.ingredients.filter(Boolean);
+    setStep({ ...selectedBrew, ingredients: newIngredients, stage: 1 });
   };
 
   const handleDelete = () => {
     // const newBrew = brew.filter((brews) => brews !== b)
-    setBrew(brew.filter((brews) => brews !== selectedBrew));
+    deleteBrews(selectedBrew._id);
     setPrompt(false);
     setOpen(!open);
   };

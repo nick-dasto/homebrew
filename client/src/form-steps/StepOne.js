@@ -152,11 +152,15 @@ function StepOne({ step, next, prev, handleChangeGeneral, returnABV }) {
             }}
           />
           <TextField
-            id="standard-basic"
+            id="date"
             label="Bottling Date"
+            type="date"
             name="dateBottling"
             value={step.generalInfo.dateBottling}
             onChange={handleChangeGeneral}
+            InputLabelProps={{
+              shrink: true,
+            }}
           />
         </form>
       </CardContent>

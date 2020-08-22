@@ -1,38 +1,19 @@
-import React, { useContext } from "react";
-import Entry from "./Entry";
-import View from "./View";
-import Form from "./Form";
-import { BrewContext } from "../context/BrewContext";
-import { Grid } from "@material-ui/core";
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
+import Landing from './Landing'
+import Register from './Register'
+import Login from './Login'
+import Brews from './Brews'
+
 
 function Body() {
-  const { create, brew, open } = useContext(BrewContext);
-
-  if (create) {
-    return (
-      <Grid container>
-        <Grid item xs={12}>
-          <Form />
-        </Grid>
-      </Grid>
-    );
-  } else if (open) {
-    return (
-      <Grid container>
-        <View />
-      </Grid>
-    );
-  } else {
-    return (
-      <Grid container spacing={2}>
-        {brew.map((b) => (
-          <Grid item xs={12} sm={6} key={b.generalInfo.name}>
-            <Entry b={b} />
-          </Grid>
-        ))}
-      </Grid>
-    );
-  }
+  return (
+    <Switch>
+        <Route exact path="/" component={Landing} />
+        <Route path='/register' component={Register} />
+        <Route path='/login' component={Login} />
+        <Route path='/brews' component={Brews} />
+    </Switch>
+  )
 }
-
 export default Body;

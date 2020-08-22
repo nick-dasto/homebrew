@@ -103,6 +103,7 @@ const BrewScheme = new mongoose.Schema({
     type: String,
     trim: true,
   },
+  userId: {type: String, required: true}
 });
 
 module.exports = mongoose.model("Brew", BrewScheme);
