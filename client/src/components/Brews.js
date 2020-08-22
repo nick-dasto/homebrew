@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }))
 
-function Brews() {
+function Brews({ dark }) {
     const classes = useStyles();
     const { create, brew, open, checkLoggedIn } = useContext(BrewContext);
 
@@ -32,7 +32,7 @@ function Brews() {
     } else if (open) {
       return (
         <Grid container className={classes.container}>
-          <View />
+          <View dark={dark} />
         </Grid>
       );
     } else {

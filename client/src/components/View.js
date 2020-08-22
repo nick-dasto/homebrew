@@ -1,25 +1,15 @@
 import React, { useState, useContext } from "react";
 import { BrewContext } from "../context/BrewContext";
-import {
-  Button,
-  Grid,
-  Typography,
-  Card,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-} from "@material-ui/core";
+import { Button, Grid, Typography, Card, List, ListItem, 
+  ListItemText, ListItemIcon, Dialog, DialogActions,
+  DialogContent, DialogContentText } from "@material-ui/core";
 import ArrowRightIcon from "@material-ui/icons/ArrowRight";
 import { makeStyles } from "@material-ui/core/styles";
 
+function View({ dark }) {
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#f8f8ff",
+    backgroundColor: theme.palette.background.default,
     boxShadow:
       "rgba(0, 0, 0, 0.2) 0px 2px 1px -1px, rgba(0, 0, 0, 0.14) 0px 1px 1px 0px, rgba(0, 0, 0, 0.12) 0px 1px 3px 0px",
     padding: "1rem",
@@ -65,7 +55,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function View() {
   const classes = useStyles();
   const [prompt, setPrompt] = useState(false);
   const handlePromptShow = () => {
@@ -110,7 +99,7 @@ function View() {
 
   return (
     <Grid container spacing={1} className={classes.container}>
-      <Grid container item spacing={1} sm={12} md={6} className="page one">
+      <Grid container item spacing={1} sm={12} md={6}>
         <Grid item xs={12}>
           <Card className={classes.section}>
             <Typography variant="h5" className={classes.sectionTitle}>
@@ -218,7 +207,7 @@ function View() {
           </Card>
         </Grid>
       </Grid>
-      <Grid container item spacing={1} sm={12} md={6} className="page two">
+      <Grid container item spacing={1} sm={12} md={6}>
         <Grid item xs={12} sm={6}>
           <Card className={classes.section}>
             <Typography variant="h5" className={classes.sectionTitle}>

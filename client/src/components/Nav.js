@@ -3,7 +3,7 @@ import axios from 'axios'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useHistory } from 'react-router-dom'
 import { BrewContext } from '../context/BrewContext'
-import { ACTIONS, MESSAGE } from '../context/AppReducer'
+import { MESSAGE } from '../context/AppReducer'
 import { AppBar, Toolbar, Typography, IconButton, Drawer, List, ListItem, 
     ListItemIcon, ListItemText, makeStyles, Switch, Dialog, DialogTitle, Divider, 
     MenuItem, Select, ButtonGroup, Button, Snackbar } from '@material-ui/core'
@@ -110,7 +110,7 @@ const useStyles = makeStyles((theme) => ({
     title:{
         textAlign: 'center',
         paddingTop: theme.spacing(1),
-        color: theme.palette.text.primary,
+        // color: theme.palette.text.primary,
         [theme.breakpoints.down("sm")]: {
             order: '1',
             fontSize: '1.75rem'
@@ -139,8 +139,8 @@ function Nav({ dark, setDark, primary, setPrimary, secondary, setSecondary }) {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
-  const { userData, setUserData, dispatch, snackMessage, 
-    configData, setSnackMessage, create, setCreate  } = useContext(BrewContext)
+  const { userData, setUserData, snackMessage, configData, 
+    setSnackMessage, create, setCreate, setBrew  } = useContext(BrewContext)
   const history = useHistory();
 
   useEffect(() => {
@@ -152,22 +152,22 @@ function Nav({ dark, setDark, primary, setPrimary, secondary, setSecondary }) {
     // eslint-disable-next-line
   }, [userData])
 
-  const register = () => {
-    history.push("/register");
-  }
-  const login = () => {
-    history.push("/login");
-  }
+//   const register = () => {
+//     history.push("/register");
+//   }
+//   const login = () => {
+//     history.push("/login");
+//   }
   const logout = () => {
     setUserData({
         token:undefined,
         user: undefined
     })
     localStorage.removeItem("x-auth-token")
-    dispatch({type: ACTIONS.GET_TODO, payload: []});
+    setBrew([]);
     setDark(false);
-    setPrimary(green)
-    setSecondary(yellow)
+    setPrimary(blueGrey)
+    setSecondary(blue)
     history.push("/login");
   }
   const openBrews = () => {
@@ -244,8 +244,7 @@ const changeDark = async (id) => {
         </Drawer></>)}
      <Typography variant='h4' className={classes.title}><FontAwesomeIcon icon={faBeer} className={classes.pad} />
         {!userData.user ? '   Home Brew Recipes' : `   ${userData.user.firstName}'s Home Brew`}</Typography>
-        {!userData.user ? (<ButtonGroup><Button onClick={register}>Register</Button>
-        <Button onClick={login}>Login</Button></ButtonGroup>) : (<ButtonGroup>
+        {!userData.user ? null : (<ButtonGroup>
           <Button variant="contained" size="large" startIcon={!create ? <AddIcon /> : <CloseIcon />} onClick={() => setCreate(!create)}>
             {!create ? "Add" : "Close"} </Button><Button variant='contained' onClick={logout}>Log out</Button></ButtonGroup>)}
         <Dialog className={classes.menu} open={openSettings} onClose={closeSettingsMenu} fullWidth maxWidth='sm'>

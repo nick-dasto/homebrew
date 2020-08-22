@@ -11,7 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    backgroundColor: "#f8f8ff",
+   // backgroundColor: "#f8f8ff",
   },
   buttonCenter: {
     display: "flex",
