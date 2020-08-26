@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
 
 function Brews({ dark }) {
     const classes = useStyles();
-    const { create, brew, open, checkLoggedIn } = useContext(BrewContext);
+    const { create, brew, open, checkLoggedIn, update } = useContext(BrewContext);
 
     useEffect(() => {
       checkLoggedIn();
       // eslint-disable-next-line
-    },[brew])
+    },[update])
   
     if (create) {
       return (

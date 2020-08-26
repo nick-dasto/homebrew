@@ -14,9 +14,6 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  container: {
-    backgroundColor: "#f8f8ff",
-  },
   buttonCenter: {
     display: "flex",
     justifyContent: "center",
@@ -45,7 +42,7 @@ function StepOne({ step, next, prev, handleChangeGeneral, returnABV }) {
   const classes = useStyles();
 
   return (
-    <Card className={classes.container}>
+    <Card>
       <CardContent>
         <h1>General Info</h1>
         <form className={classes.root} noValidate autoComplete="off">

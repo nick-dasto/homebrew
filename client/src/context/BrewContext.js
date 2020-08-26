@@ -6,6 +6,7 @@ export const BrewContext = createContext();
 
 export const BrewProvider = (props) => {
   const [brew, setBrew] = useState([]);
+  const [update, setUpdate] = useState(0)
   const [create, setCreate] = useState(false);
   const [step, setStep] = useState(formData);
   const [edit, setEdit] = useState(false);
@@ -54,6 +55,7 @@ export const BrewProvider = (props) => {
   const addBrews = async (newBrew) => {
     try {
       await axios.post("/api/v1/brews", newBrew, configData);
+      setUpdate(update+1)
       setSnackMessage(MESSAGE.ADD_BREW)
     } catch (err) {
       console.log(err);
@@ -62,6 +64,7 @@ export const BrewProvider = (props) => {
   const deleteBrews = async (id) => {
     try {
       await axios.delete(`/api/v1/brews/${id}`, config);
+      setUpdate(update+1)
       setSnackMessage(MESSAGE.DELETE_BREW)
     } catch (err) {
       console.log(err);
@@ -70,6 +73,7 @@ export const BrewProvider = (props) => {
   const editBrews = async (id, newBrew) => {
     try {
       await axios.patch(`/api/v1/brews/${id}`, newBrew, configData);
+      setUpdate(update+1)
       setSnackMessage(MESSAGE.EDIT_BREW)
     } catch (err) {
       console.log("edit brews error", err);
@@ -82,7 +86,8 @@ export const BrewProvider = (props) => {
         edit, setEdit, selectedBrew, setSelectedBrew,
         open, setOpen, snackMessage, setSnackMessage,
         userData, setUserData, config, configData, getBrews,
-        deleteBrews, addBrews, editBrews, checkLoggedIn
+        deleteBrews, addBrews, editBrews, checkLoggedIn,
+        update, setUpdate
       }}
     >
       {props.children}

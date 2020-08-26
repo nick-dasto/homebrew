@@ -11,6 +11,8 @@ import Alert from '@material-ui/lab/Alert';
 import MenuIcon from '@material-ui/icons/Menu';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import SettingsIcon from '@material-ui/icons/Settings';
+import BugReportIcon from '@material-ui/icons/BugReport';
+import GitHubIcon from '@material-ui/icons/GitHub';
 import AddIcon from '@material-ui/icons/Add';
 import CloseIcon from '@material-ui/icons/Close';
 import { faBeer } from '@fortawesome/free-solid-svg-icons'
@@ -97,45 +99,46 @@ const storeColor = (color) => {
     if(color === grey) return 'Grey'
     if(color === blueGrey) return 'Blue-Grey'
 }
-const useStyles = makeStyles((theme) => ({
-    toolBar:{
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position:'relative',
-        [theme.breakpoints.down("sm")]: {
-            flexWrap: 'wrap',
-            // flexDirection: 'row-reverse',
-        }
-    },
-    title:{
-        textAlign: 'center',
-        paddingTop: theme.spacing(1),
-        // color: theme.palette.text.primary,
-        [theme.breakpoints.down("sm")]: {
-            order: '1',
-            fontSize: '1.75rem'
-        }
-    },
-    switch:{
-        marginLeft: 'auto'
-    },
-    list:{
-        minWidth: 225,
-        height: '100%',
-        display: 'flex',
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        backgroundColor: theme.palette.primary.light
-    },
-    menu:{
-        overflow:'hidden',
-    },
-    settings:{
-        marginTop:'auto'
-    }
-}))
-
 function Nav({ dark, setDark, primary, setPrimary, secondary, setSecondary }) {
+    const useStyles = makeStyles((theme) => ({
+        toolBar:{
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            position:'relative',
+            [theme.breakpoints.down("630")]: {
+                flexWrap: 'wrap',
+            }
+        },
+        title:{
+            textAlign: 'center',
+            paddingTop: theme.spacing(1),
+            color: theme.palette.text.primary,
+            [theme.breakpoints.down("630")]: {
+                order: '3',
+                margin: 'auto'
+            }
+        },
+        switch:{
+            marginLeft: 'auto'
+        },
+        list:{
+            minWidth: 225,
+            height: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+            backgroundColor: dark ?  theme.palette.primary.dark : theme.palette.primary.light
+        },
+        menu:{
+            overflow:'hidden',
+        },
+        text: {
+            zIndex: 10,
+            color: theme.palette.text.primary,
+            textDecoration: "none",
+          },
+    }))
+    
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [openSettings, setOpenSettings] = useState(false);
@@ -144,30 +147,27 @@ function Nav({ dark, setDark, primary, setPrimary, secondary, setSecondary }) {
   const history = useHistory();
 
   useEffect(() => {
-    if(userData.user) return setPrimary(getColor(userData.user.primary))
+    updateTheme();
     // eslint-disable-next-line
-    if(userData.user) return setSecondary(getColor(userData.user.secondary))
-    // eslint-disable-next-line
-    if(userData.user) return setDark(userData.user.theme)
-    // eslint-disable-next-line
-  }, [userData])
+}, [userData])
 
-//   const register = () => {
-//     history.push("/register");
-//   }
-//   const login = () => {
-//     history.push("/login");
-//   }
-  const logout = () => {
+const updateTheme = async () => {
+  if(userData.user) {
+      setPrimary(getColor(userData.user.primary))
+      setSecondary(getColor(userData.user.secondary))
+      setDark(userData.user.theme)
+  } 
+}
+const logout = async () => {
     setUserData({
         token:undefined,
         user: undefined
     })
-    localStorage.removeItem("x-auth-token")
-    setBrew([]);
-    setDark(false);
-    setPrimary(blueGrey)
-    setSecondary(blue)
+    await localStorage.removeItem("x-auth-token")
+    await setBrew([]);
+    await setDark(false);
+    await setPrimary(blueGrey)
+    await setSecondary(blue)
     history.push("/login");
   }
   const openBrews = () => {
@@ -213,7 +213,6 @@ const changeDark = async (id) => {
     }catch(err){
         console.log(err)
     }
-
 }
 
   return (
@@ -223,28 +222,50 @@ const changeDark = async (id) => {
             <Alert severity="success">{snackMessage}</Alert>
     </Snackbar>
     <Toolbar className={classes.toolBar}>
-        {!userData.user ? '' : (<><IconButton className={classes.menuIcon} onClick={() => setOpen(true)}>
+        {userData.user && (<><IconButton className={classes.menuIcon} onClick={() => setOpen(true)}>
             <MenuIcon />
         </IconButton>
         <Drawer anchor='left' open={open} onClose={() => setOpen(false)}>
             <List className={classes.list}>
-                <ListItem button onClick={openBrews}>
-                    <ListItemIcon>
-                        <ListAltIcon />
-                    </ListItemIcon>
-                    <ListItemText primary='Brews' />
+                <List>
+                    <ListItem button onClick={openBrews}>
+                        <ListItemIcon>
+                            <ListAltIcon />
+                        </ListItemIcon>
+                        <ListItemText primary='Brews' />
                     </ListItem>
-                <ListItem button onClick={openSettingsMenu} className={classes.settings}>
-                    <ListItemIcon>
-                        <SettingsIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="Settings"/>
-                </ListItem>
+                </List>
+                <List>
+                    <ListItem button onClick={openSettingsMenu} className={classes.settings}>
+                        <ListItemIcon>
+                            <SettingsIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Settings"/>
+                    </ListItem>
+                    <a href="https://github.com/nick-dasto/homebrew/issues" target="_blank" 
+                    rel="noopener noreferrer" className={classes.text}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <BugReportIcon />
+                        </ListItemIcon>
+                        <ListItemText primary="Report Bug"/>
+                    </ListItem>
+                    </a>
+                    <a href="https://github.com/nick-dasto" target="_blank" 
+                        rel="noopener noreferrer" className={classes.text}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <GitHubIcon />
+                            </ListItemIcon>
+                            <ListItemText primary="View More"/>
+                        </ListItem>
+                    </a>
+                </List>
             </List>
         </Drawer></>)}
      <Typography variant='h4' className={classes.title}><FontAwesomeIcon icon={faBeer} className={classes.pad} />
         {!userData.user ? '   Home Brew Recipes' : `   ${userData.user.firstName}'s Home Brew`}</Typography>
-        {!userData.user ? null : (<ButtonGroup>
+        {userData.user && (<ButtonGroup>
           <Button variant="contained" size="large" startIcon={!create ? <AddIcon /> : <CloseIcon />} onClick={() => setCreate(!create)}>
             {!create ? "Add" : "Close"} </Button><Button variant='contained' onClick={logout}>Log out</Button></ButtonGroup>)}
         <Dialog className={classes.menu} open={openSettings} onClose={closeSettingsMenu} fullWidth maxWidth='sm'>

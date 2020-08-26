@@ -12,7 +12,7 @@ function Body({ dark }) {
         <Route exact path="/" component={Landing} />
         <Route path='/register' component={Register} />
         <Route path='/login' component={Login} />
-        <Route path='/brews' component={Brews} dark={dark} />
+        <Route path='/brews' render={(props) => <Brews {...props} dark={dark} />} />
     </Switch>
   )
 }
